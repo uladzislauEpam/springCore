@@ -20,12 +20,7 @@ public class EventDao implements DestructionAwareBeanPostProcessor {
   private final Map<Integer, Event> map = new HashMap<>();
 
   public void addToList(int id, String name, String place, Date date) {
-//    new Event(id, name, place, date)
     Event event = new Event();
-//    event.setDate(date);
-//    event.setId(id);
-//    event.setName(name);
-//    event.setPlace(place);
     map.put(id, event);
   }
 

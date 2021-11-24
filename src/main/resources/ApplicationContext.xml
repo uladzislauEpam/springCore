@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.0.xsd
-    http://www.springframework.org/schema/aop
-    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-    ">
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-  <bean id="eventDao" class="com.epam.springcore.dao.impl.EventDao">
+  <bean id="eventDao"
+    class="com.epam.springcore.dao.impl.EventDao">
   </bean>
 
-  <bean id="ticketDao" class="com.epam.springcore.dao.impl.TicketDao">
+  <bean id="ticketDao"
+    class="com.epam.springcore.dao.impl.TicketDao">
   </bean>
 
-  <bean id="userDao" class="com.epam.springcore.dao.impl.UserDao">
+  <bean id="userDao"
+    class="com.epam.springcore.dao.impl.UserDao">
   </bean>
 
-  <bean id="userService" class="com.epam.springcore.service.impl.UserService">
+  <bean id="userService"
+    class="com.epam.springcore.service.impl.UserService">
+    <constructor-arg index="0" ref="userDao"/>
   </bean>
 
-  <context:annotation-config />
+  <bean id="ticketService"
+    class="com.epam.springcore.service.impl.TicketService">
+    <constructor-arg index="0" ref="ticketDao"/>
+  </bean>
+
+  <bean id="eventService"
+    class="com.epam.springcore.service.impl.EventService">
+    <constructor-arg index="0" ref="eventDao"/>
+  </bean>
+
+  <bean id="bookingFacade"
+    class="com.epam.springcore.service.delegator.BookingFacadeImpl">
+  </bean>
 </beans>

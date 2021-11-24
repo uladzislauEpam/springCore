@@ -1,20 +1,22 @@
 package com.epam.springcore.service.impl;
 
-import com.epam.springcore.dao.impl.TicketDao;
+import com.epam.springcore.dao.EntityDao;
 import com.epam.springcore.entity.Ticket;
-import com.epam.springcore.entity.Ticket;
+import com.epam.springcore.service.EntityService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public class TicketService {
+public class TicketService implements EntityService<Ticket> {
 
-  @Autowired
-  TicketDao ticketDao;
+  private EntityDao<Ticket> ticketDao;
 
-  public Ticket create(int id, int userId, int eventId, String title, int price) {
-    return ticketDao.addToList(id, userId, eventId, title, price);
+  public TicketService(EntityDao<Ticket> dao) {
+    this.ticketDao = dao;
+  }
+
+  public Ticket create(Ticket ticket) {
+    return ticketDao.addToList(ticket);
   }
 
   public Map<Integer, Ticket> show() {

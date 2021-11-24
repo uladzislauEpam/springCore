@@ -4,29 +4,30 @@ import com.epam.springcore.entity.Event;
 import com.epam.springcore.entity.Ticket;
 import com.epam.springcore.entity.User;
 import com.epam.springcore.service.BookingFacade;
-import com.epam.springcore.service.impl.EventService;
-import com.epam.springcore.service.impl.TicketService;
-import com.epam.springcore.service.impl.UserService;
+import com.epam.springcore.service.EntityService;
 import java.util.Date;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class BookingFacadeImpl implements BookingFacade {
 
-  @Autowired
-  UserService userService;
+  private final EntityService<User> userService;
 
-  @Autowired
-  TicketService ticketService;
+  private final EntityService<Ticket> ticketService;
 
-  @Autowired
-  EventService eventService;
+  private final EntityService<Event> eventService;
+
+  public BookingFacadeImpl(EntityService<User> userService,
+      EntityService<Ticket> ticketService,
+      EntityService<Event> eventService) {
+    this.ticketService = ticketService;
+    this.eventService = eventService;
+    this.userService = userService;
+  }
 
   @Override
   public User createUser(int id, String firstName, String lastName, int age) {
-    return userService.create(id, firstName, lastName, age);
+    User user = new User(id, firstName, lastName, age);
+    return userService.create(user);
   }
 
   @Override
@@ -41,7 +42,8 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public Event createEvent(int id, String name, String place, Date date) {
-    return eventService.create(id, name, place, date);
+    Event event = new Event(id, name, place, date);
+    return eventService.create(event);
   }
 
   @Override
@@ -56,7 +58,8 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public Ticket bookTicket(int id, User user, Event event, String title, int price) {
-    return ticketService.create(id, user.getId(), event.getId(), title, price);
+    Ticket ticket = new Ticket(id, user.getId(), event.getId(), title, price);
+    return ticketService.create(ticket);
   }
 
   @Override

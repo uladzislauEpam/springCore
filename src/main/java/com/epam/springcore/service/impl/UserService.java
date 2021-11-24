@@ -1,24 +1,26 @@
 package com.epam.springcore.service.impl;
 
-import com.epam.springcore.dao.impl.UserDao;
+import com.epam.springcore.dao.EntityDao;
 import com.epam.springcore.entity.User;
-import com.epam.springcore.entity.enums.EntityType;
+import com.epam.springcore.service.EntityService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserService {
+public class UserService implements EntityService<User> {
 
   private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-  @Autowired
-  UserDao userDao;
+  private final EntityDao<User> userDao;
 
-  public User create(int id, String firstName, String lastName, int age) {
-    return userDao.addToList(id, firstName, lastName, age);
+  public UserService(EntityDao<User> dao) {
+    this.userDao = dao;
+  }
+
+  public User create(User user) {
+    return userDao.addToList(user);
   }
   
   public Map<Integer, User> show() {

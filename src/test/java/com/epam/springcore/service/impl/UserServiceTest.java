@@ -23,8 +23,7 @@ public class UserServiceTest {
   @BeforeEach
   void setUp() {
     userDao = Mockito.spy(new UserDao());
-    userService = Mockito.spy(new UserService());
-    userService.userDao = userDao;
+    userService = Mockito.spy(new UserService(userDao));
   }
 
   @Test

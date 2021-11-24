@@ -1,18 +1,16 @@
 package com.epam.springcore.dao.impl;
 
+import com.epam.springcore.dao.EntityDao;
 import com.epam.springcore.entity.User;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import org.springframework.stereotype.Repository;
 
-public class UserDao {
+public class UserDao implements EntityDao<User> {
 
   private final Map<Integer, User> map = new HashMap<>();
 
-  public User addToList(int id, String firstName, String lastName, int age) {
-    User user = new User(id, firstName, lastName, age);
-    map.put(id, user);
+  public User addToList(User user) {
+    map.put(user.getId(), user);
     return user;
   }
 

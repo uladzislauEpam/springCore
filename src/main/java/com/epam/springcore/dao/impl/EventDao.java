@@ -1,26 +1,16 @@
 package com.epam.springcore.dao.impl;
 
+import com.epam.springcore.dao.EntityDao;
 import com.epam.springcore.entity.Event;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
-import org.springframework.stereotype.Repository;
 
-public class EventDao {
+public class EventDao implements EntityDao<Event> {
 
   private final Map<Integer, Event> map = new HashMap<>();
 
-  public Event addToList(int id, String name, String place, Date date) {
-    Event event = new Event(id, name, place, date);
-    map.put(id, event);
+  public Event addToList(Event event) {
+    map.put(event.getId(), event);
     return event;
   }
 

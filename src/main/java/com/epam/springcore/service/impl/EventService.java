@@ -1,21 +1,22 @@
 package com.epam.springcore.service.impl;
 
-import com.epam.springcore.dao.impl.EventDao;
+import com.epam.springcore.dao.EntityDao;
 import com.epam.springcore.entity.Event;
-import com.epam.springcore.entity.User;
+import com.epam.springcore.service.EntityService;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public class EventService {
+public class EventService implements EntityService<Event> {
 
-  @Autowired
-  EventDao eventDao;
+  private EntityDao<Event> eventDao;
 
-  public Event create(int id, String name, String place, Date date) {
-    return eventDao.addToList(id, name, place, date);
+  public EventService(EntityDao<Event> dao) {
+    this.eventDao = dao;
+  }
+
+  public Event create(Event event) {
+    return eventDao.addToList(event);
   }
 
   public Map<Integer, Event> show() {

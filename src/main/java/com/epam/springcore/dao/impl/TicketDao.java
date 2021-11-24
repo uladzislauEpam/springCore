@@ -1,17 +1,16 @@
 package com.epam.springcore.dao.impl;
 
+import com.epam.springcore.dao.EntityDao;
 import com.epam.springcore.entity.Ticket;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.stereotype.Repository;
 
-public class TicketDao {
+public class TicketDao implements EntityDao<Ticket> {
 
   private final Map<Integer, Ticket> map = new HashMap<>();
 
-  public Ticket addToList(int id, int userId, int eventId, String title, int price) {
-    Ticket ticket = new Ticket(id, userId, eventId, title, price);
-    map.put(id, ticket);
+  public Ticket addToList(Ticket ticket) {
+    map.put(ticket.getId(), ticket);
     return ticket;
   }
 

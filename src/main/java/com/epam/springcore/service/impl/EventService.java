@@ -26,7 +26,7 @@ public class EventService implements EntityService<Map<Integer, Event>> {
       int id = Integer.parseInt(parameters.get("id"));
       String name = parameters.get("name");
       String place = parameters.get("place");
-      Date date = new SimpleDateFormat("dd/MM/yyyy").parse(parameters.get("date"));
+      Date date = new SimpleDateFormat("yyyy-MM-dd").parse(parameters.get("date"));
       eventDao.addToList(id, name, place, date);
     } catch (Exception e) {
       e.printStackTrace();

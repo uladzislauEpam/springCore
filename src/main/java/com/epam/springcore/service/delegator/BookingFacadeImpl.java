@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class BookingFacadeImpl implements BookingFacade {
 
   @Autowired
-  private final List<EntityService> entityServices;
+  private final List<EntityService<>> entityServices;
 
   private Map<EntityType, EntityService> entityServiceMap;
 

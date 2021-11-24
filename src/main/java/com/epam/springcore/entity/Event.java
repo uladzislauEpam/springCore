@@ -11,9 +11,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode
-@ToString
+//@ToString
 public class Event {
 
   private int id;
@@ -23,5 +23,22 @@ public class Event {
   private String place;
 
   private Date date;
+
+  public Event(int id, String name, String place, Date date) {
+    this.id = id;
+    this.name = name;
+    this.place = place;
+    this.date = date;
+  }
+
+  @Override
+  public String toString() {
+    return "Event{"
+        + "id='" + id + '\''
+        + ", name=" + name
+        + ", place=" + place
+        + ", date=" + date
+        + '}';
+  }
 
 }

@@ -22,12 +22,4 @@ public class UserDao {
   public void deleteFromList(int id) {
     map.remove(id);
   }
-
-  public String convertWithStream() {
-    User user = map.get(1);
-    String value = user.toString();
-    return map.keySet().stream()
-        .map(key -> key + "=" + map.get(key).toString())
-        .collect(Collectors.joining(", ", "{", "}"));
-  }
 }

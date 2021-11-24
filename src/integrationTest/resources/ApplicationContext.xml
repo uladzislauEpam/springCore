@@ -33,5 +33,8 @@
 
   <bean id="bookingFacade"
     class="com.epam.springcore.service.delegator.BookingFacadeImpl">
+    <constructor-arg index="0" ref="userService"/>
+    <constructor-arg index="1" ref="ticketService"/>
+    <constructor-arg index="2" ref="eventService"/>
   </bean>
 </beans>

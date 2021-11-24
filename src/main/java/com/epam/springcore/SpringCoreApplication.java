@@ -1,6 +1,8 @@
 package com.epam.springcore;
 
 import com.epam.springcore.entity.User;
+import com.epam.springcore.service.BookingFacade;
+import com.epam.springcore.service.delegator.BookingFacadeImpl;
 import com.epam.springcore.service.impl.UserService;
 import java.util.logging.Level;
 import java.util.logging.Logger;

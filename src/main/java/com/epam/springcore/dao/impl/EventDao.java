@@ -14,14 +14,12 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public class EventDao implements DestructionAwareBeanPostProcessor {
 
   private final Map<Integer, Event> map = new HashMap<>();
 
   public void addToList(int id, String name, String place, Date date) {
-    Event event = new Event();
-    map.put(id, event);
+    map.put(id, new Event());
   }
 
   public Map<Integer, Event> getFromList() {

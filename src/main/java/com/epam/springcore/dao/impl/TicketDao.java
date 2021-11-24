@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public class TicketDao {
 
   private final Map<Integer, Ticket> map = new HashMap<>();

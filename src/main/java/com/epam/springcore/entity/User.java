@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode
-@ToString
+//@ToString
 public class User {
 
   private int id;
@@ -18,5 +18,22 @@ public class User {
   private String lastName;
 
   private int age;
+
+  public User(int id, String firstName, String lastName, int age) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
+
+  @Override
+  public String toString() {
+    return "User{"
+        + "id='" + id + '\''
+        + ", firstName=" + firstName
+        + ", lastName=" + lastName
+        + ", age=" + age
+        + '}';
+  }
 
 }

@@ -1,22 +1,27 @@
 package com.epam.springcore;
 
-import com.epam.springcore.entity.enums.ActionType;
-import com.epam.springcore.entity.enums.EntityType;
-import com.epam.springcore.service.BookingFacade;
-import com.epam.springcore.service.delegator.BookingFacadeImpl;
+import com.epam.springcore.service.impl.UserService;
 import java.util.HashMap;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@SpringBootApplication
 public class SpringCoreApplication {
-
-  @Autowired
-  static BookingFacadeImpl bookingFacade;
-
   public static void main(String[] args) {
-    SpringApplication.run(SpringCoreApplication.class, args);
+    {
+      Logger logger = Logger.getLogger(SpringCoreApplication.class.getName());
+      ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+      UserService userService = (UserService) ac.getBean("userService");
+      userService.create(new HashMap<>() {{
+        put("id", "1");
+        put("firstName", "Ben");
+        put("lastName", "Brown");
+        put("age", "30");
+      }});
+      userService.show();
+      logger.log(Level.WARNING, "1 object created");
+      ac.close();
+    }
   }
 }
 

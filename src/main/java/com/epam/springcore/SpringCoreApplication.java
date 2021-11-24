@@ -12,12 +12,7 @@ public class SpringCoreApplication {
       Logger logger = Logger.getLogger(SpringCoreApplication.class.getName());
       ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("ApplicationContext.xml");
       UserService userService = (UserService) ac.getBean("userService");
-      userService.create(new HashMap<>() {{
-        put("id", "1");
-        put("firstName", "Ben");
-        put("lastName", "Brown");
-        put("age", "30");
-      }});
+      userService.create(1, "Ben", "Brown", 30);
       userService.show();
       logger.log(Level.WARNING, "1 object created");
       ac.close();

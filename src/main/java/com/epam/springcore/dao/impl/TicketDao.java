@@ -9,9 +9,10 @@ public class TicketDao {
 
   private final Map<Integer, Ticket> map = new HashMap<>();
 
-  public void addToList(int id, int userId, int eventId, String title, int price) {
+  public Ticket addToList(int id, int userId, int eventId, String title, int price) {
     Ticket ticket = new Ticket(id, userId, eventId, title, price);
     map.put(id, ticket);
+    return ticket;
   }
 
   public Map<Integer, Ticket> getFromList() {

@@ -8,11 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@NoArgsConstructor
+//@Getter
+//@Setter
+//@NoArgsConstructor
 //@AllArgsConstructor
-@EqualsAndHashCode
+//@EqualsAndHashCode
 //@ToString
 public class Event {
 
@@ -29,6 +29,10 @@ public class Event {
     this.name = name;
     this.place = place;
     this.date = date;
+  }
+
+  public int getId() {
+    return id;
   }
 
   @Override

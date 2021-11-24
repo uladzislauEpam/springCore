@@ -2,50 +2,32 @@ package com.epam.springcore.service.impl;
 
 import com.epam.springcore.dao.impl.EventDao;
 import com.epam.springcore.entity.Event;
-import com.epam.springcore.entity.enums.EntityType;
-import com.epam.springcore.service.EntityService;
-import java.text.SimpleDateFormat;
+import com.epam.springcore.entity.User;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-public class EventService implements EntityService<Map<Integer, Event>> {
+public class EventService {
 
   @Autowired
   EventDao eventDao;
 
-  @Override
-  public EntityType supportedEntityType() {
-    return EntityType.EVENT;
+  public Event create(int id, String name, String place, Date date) {
+    return eventDao.addToList(id, name, place, date);
   }
 
-  @Override
-  public void create(Map<String, String> parameters) {
-    try {
-      int id = Integer.parseInt(parameters.get("id"));
-      String name = parameters.get("name");
-      String place = parameters.get("place");
-      Date date = new SimpleDateFormat("yyyy-MM-dd").parse(parameters.get("date"));
-      eventDao.addToList(id, name, place, date);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
-  @Override
   public Map<Integer, Event> show() {
     return eventDao.getFromList();
   }
 
-  @Override
-  public void delete(Map<String, String> parameters) {
-    try {
-      int id = Integer.parseInt(parameters.get("id"));
-      eventDao.deleteFromList(id);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  public List<Event> showAsList() {
+    Map<Integer, Event> map = eventDao.getFromList();
+    return new ArrayList<>(map.values());
   }
 
+  public void delete(int id) {
+    eventDao.deleteFromList(id);
+  }
 }

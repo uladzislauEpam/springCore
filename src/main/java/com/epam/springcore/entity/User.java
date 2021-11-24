@@ -1,13 +1,17 @@
 package com.epam.springcore.entity;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@NoArgsConstructor
+//@Getter
+//@Setter
+//@NoArgsConstructor
 //@AllArgsConstructor
-@EqualsAndHashCode
+//@EqualsAndHashCode
 //@ToString
 public class User {
 
@@ -24,6 +28,10 @@ public class User {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
+  }
+
+  public int getId() {
+    return id;
   }
 
   @Override

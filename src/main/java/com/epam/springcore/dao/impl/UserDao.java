@@ -10,9 +10,10 @@ public class UserDao {
 
   private final Map<Integer, User> map = new HashMap<>();
 
-  public void addToList(int id, String firstName, String lastName, int age) {
+  public User addToList(int id, String firstName, String lastName, int age) {
     User user = new User(id, firstName, lastName, age);
     map.put(id, user);
+    return user;
   }
 
   public Map<Integer, User> getFromList() {

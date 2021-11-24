@@ -18,9 +18,10 @@ public class EventDao {
 
   private final Map<Integer, Event> map = new HashMap<>();
 
-  public void addToList(int id, String name, String place, Date date) {
+  public Event addToList(int id, String name, String place, Date date) {
     Event event = new Event(id, name, place, date);
     map.put(id, event);
+    return event;
   }
 
   public Map<Integer, Event> getFromList() {

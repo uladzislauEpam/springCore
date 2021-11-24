@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
-@NoArgsConstructor
+//@NoArgsConstructor
 //@AllArgsConstructor
-@EqualsAndHashCode
+//@EqualsAndHashCode
 //@ToString
 public class Ticket {
 
@@ -28,6 +28,10 @@ public class Ticket {
     this.eventId = eventId;
     this.title = title;
     this.price = price;
+  }
+
+  public int getId() {
+    return id;
   }
 
   @Override

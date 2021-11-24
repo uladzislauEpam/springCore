@@ -3,12 +3,12 @@ package com.epam.springcore.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.epam.springcore.entity.enums.ActionType;
-import com.epam.springcore.entity.enums.EntityType;
+import com.epam.springcore.entity.Event;
+import com.epam.springcore.entity.User;
 import com.epam.springcore.service.impl.EventService;
 import com.epam.springcore.service.impl.TicketService;
 import com.epam.springcore.service.impl.UserService;
-import java.util.HashMap;
+import java.util.Date;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,41 +41,17 @@ public class ServiceTest {
     assertNotNull(ticketService);
     assertNotNull(eventService);
 
-    userService.create(new HashMap<>() {{
-      put("id", "1");
-      put("firstName", "Ben");
-      put("lastName", "Brown");
-      put("age", "30");
-    }});
-
-    eventService.create(new HashMap<>() {{
-      put("id", "1");
-      put("name", "PARTY");
-      put("place", "Joe mama");
-      put("date", "2022-01-01");
-    }});
-
-    ticketService.create(new HashMap<>() {{
-      put("id", "1");
-      put("userId", "1");
-      put("eventId", "1");
-      put("title", "NY!!!");
-      put("price", "400");
-    }});
+    User user = bookingFacade.createUser(1, "Ben", "Ten", 20);
+    Event event = bookingFacade.createEvent(1, "PARTY", "Joe mama", new Date());
+    bookingFacade.bookTicket(1, user, event, "NY", 400);
 
     assertEquals(1, userService.show().size());
     assertEquals(1, eventService.show().size());
     assertEquals(1, ticketService.show().size());
 
-    ticketService.delete(new HashMap<>() {{
-      put("id", "1");
-    }});
-
     assertNotNull(bookingFacade);
 
-//    bookingFacade.delegate(EntityType.TICKET, ActionType.DELETE, new HashMap<>() {{
-//      put("id", "1");
-//    }});
+    bookingFacade.returnTicket(1);
 
     assertEquals(1, userService.show().size());
     assertEquals(1, eventService.show().size());

@@ -1,15 +1,14 @@
 package com.epam.springcore.service.delegator;
 
-import com.epam.springcore.entity.enums.ActionType;
-import com.epam.springcore.entity.enums.EntityType;
+import com.epam.springcore.entity.Event;
+import com.epam.springcore.entity.Ticket;
+import com.epam.springcore.entity.User;
 import com.epam.springcore.service.BookingFacade;
-import com.epam.springcore.service.EntityService;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.HashMap;
+import com.epam.springcore.service.impl.EventService;
+import com.epam.springcore.service.impl.TicketService;
+import com.epam.springcore.service.impl.UserService;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,37 +16,56 @@ import org.springframework.stereotype.Service;
 public class BookingFacadeImpl implements BookingFacade {
 
   @Autowired
-  private final List<EntityService> entityServices;
+  UserService userService;
 
-  private Map<EntityType, EntityService> entityServiceMap;
+  @Autowired
+  TicketService ticketService;
 
-  public BookingFacadeImpl(List<EntityService> entityServices) {
-    this.entityServices = entityServices;
+  @Autowired
+  EventService eventService;
+
+  @Override
+  public User createUser(int id, String firstName, String lastName, int age) {
+    return userService.create(id, firstName, lastName, age);
   }
 
-  @PostConstruct
-  public void init() {
-    entityServiceMap = new HashMap<>();
-    for (EntityService entityService : entityServices) {
-      entityServiceMap.put(entityService.supportedEntityType(), entityService);
-    }
+  @Override
+  public void deleteUser(int id) {
+    userService.delete(id);
   }
 
-  @SafeVarargs
-  public final void delegate(EntityType entity, ActionType action,
-      Map<String, String>... parameters) {
-    Map<String, String> parameter;
-    try {
-    if(Arrays.stream(parameters).count() != 1) {
-      throw new Exception("wrong init");
-    } else {
-      parameter = Arrays.stream(parameters)
-          .reduce((first, second) -> first)
-          .orElse(new HashMap<>());
-    }
-      Method method = entityServiceMap.get(entity).getClass().getMethod(action.toString());
-      method.invoke(entityServiceMap.get(entity), parameter);
-    } catch (Exception ignored) {}
+  @Override
+  public List<User> getUsers() {
+    return userService.showAsList();
   }
 
+  @Override
+  public Event createEvent(int id, String name, String place, Date date) {
+    return eventService.create(id, name, place, date);
+  }
+
+  @Override
+  public void deleteEvent(int id) {
+    eventService.delete(id);
+  }
+
+  @Override
+  public List<Event> getEvents() {
+    return eventService.showAsList();
+  }
+
+  @Override
+  public Ticket bookTicket(int id, User user, Event event, String title, int price) {
+    return ticketService.create(id, user.getId(), event.getId(), title, price);
+  }
+
+  @Override
+  public void returnTicket(int id) {
+    ticketService.delete(id);
+  }
+
+  @Override
+  public List<Ticket> getBookedTickets() {
+    return ticketService.showAsList();
+  }
 }
